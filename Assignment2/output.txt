@@ -1,0 +1,72 @@
+----------------------------- Boat Test Starting -----------------------------
+
+  Name Pos(X) Pos(Y)  Heading  Speed(MPH)  Load Capacity(lb)  Battery Capacity(%) 
+Boat 1     0      0       90°       10.0               20.0                   10 
+Boat 2     1      2       45°       12.0               30.0                   20 
+Boat 3     2      3      180°       14.0               40.0                   30 
+Boat 4     3      4      270°       16.0               50.0                   40 
+Boat 5     4      5       90°       18.0               25.0                   50 
+
+Original Position : (0, 0)
+Testing moveTo() method with params = (8,10)
+
+Moving Direction : 'N'
+(1,0), (2,0), (3,0), (4,0), (5,0), (6,0), (7,0), (8,0), 
+Moving Direction : 'E'
+(8,1), (8,2), (8,3), (8,4), (8,5), (8,6), (8,7), (8,8), (8,9), (8,10), 
+
+Final Position : (8, 10)
+Total steps on X axis : 8
+Total steps on Y axis : 10
+
+
+Original Position : (8, 10)
+Testing moveTo() method with params = (-8,-10)
+
+Moving Direction : 'S'
+(7,10), (6,10), (5,10), (4,10), (3,10), (2,10), (1,10), (0,10), (-1,10), (-2,10), (-3,10), (-4,10), (-5,10), (-6,10), (-7,10), (-8,10), 
+Moving Direction : 'W'
+(-8,9), (-8,8), (-8,7), (-8,6), (-8,5), (-8,4), (-8,3), (-8,2), (-8,1), (-8,0), (-8,-1), (-8,-2), (-8,-3), (-8,-4), (-8,-5), (-8,-6), (-8,-7), (-8,-8), (-8,-9), (-8,-10), 
+
+Final Position : (-8, -10)
+Total steps on X axis : 16
+Total steps on Y axis : 20
+
+------------- Testing BoatScheduler and BoatTask class -------------
+
+--------------------------------------------------------------------------
+Adding Task 1 with Boat 1 to ArrayList and HashMap
+--------------------------------------------------------------------------
+Printing from ArrayList ...
+Task ID    Name        Objective Start Date   Assigned Boat 
+     1   Task 1  Clean up Area 1 10-12-2020          Boat 1
+
+--------------------------------------------------------------------------
+Adding Task 2 with Boat 2 to ArrayList and HashMap
+--------------------------------------------------------------------------
+Printing from ArrayList ...
+Task ID    Name        Objective Start Date   Assigned Boat 
+     1   Task 1  Clean up Area 1 10-12-2020          Boat 1
+     2   Task 2  Clean up Area 2 10-12-2019          Boat 2
+
+--------------------------------------------------------------------------
+Retrieving Task 2 from ArrayList
+--------------------------------------------------------------------------
+Printing from ArrayList ...
+Task ID    Name        Objective Start Date   Assigned Boat 
+     2   Task 2  Clean up Area 2 10-12-2019          Boat 2 
+
+--------------------------------------------------------------------------
+Retrieving Boat 1 from HashMap 
+--------------------------------------------------------------------------
+Printing from HashMap ...
+Boat ID : Boat@7852e922 , Boat Name : Boat 1 , Task ID : Task 1
+
+--------------------------------------------------------------------------
+Removing Task 1 with Boat 1 from ArrayList and HashMap
+--------------------------------------------------------------------------
+Printing from ArrayList ...
+Task ID    Name        Objective Start Date   Assigned Boat 
+     2   Task 2  Clean up Area 2 10-12-2019          Boat 2
+
+----------------------------- Boat Test End -------------------------------
