@@ -21,9 +21,5 @@ public class TransportBoat extends Boat {
 	public int cargoArea() {
 		return this.height*this.width*this.length;
 	}
-	
-	
-	
-	
 
 }

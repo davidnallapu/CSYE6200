@@ -78,12 +78,34 @@ public class BoatTest {
 		
 		System.out.println("------------- Testing TranspoartBoat and BoatIO -------------\n");
 		
-		TransportBoat tb =  new TransportBoat(boatList[1].boatName, boatList[1].posX, boatList[1].posY, boatList[1].heading, boatList[1].speed, boatList[1].loadCapacity, boatList[1].batteryCapacity, 10, 20, 30);
-		System.out.println(String.format("%1$6s %2$6s %3$6s %4$8s %5$11s %6$18s %7$20s %8$5s","Name","Pos(X)","Pos(Y)","Heading","Speed(MPH)","Load Capacity(lb)","Battery Capacity(%)","CARGO"));
-		System.out.println(tb.toFormattedString());
+		TransportBoat tb1 =  new TransportBoat("T"+boatList[0].boatName, boatList[0].posX, boatList[0].posY, boatList[0].heading, boatList[0].speed, boatList[0].loadCapacity, boatList[0].batteryCapacity, 10, 20, 30);
+		System.out.println("--------------------------------------------------------------------------");
+		System.out.println("Initializing TranspoartBoat object with CARGO calculated");
+		System.out.println("--------------------------------------------------------------------------");
+		System.out.println(String.format("%1$7s %2$6s %3$6s %4$8s %5$11s %6$18s %7$20s %8$5s","Name","Pos(X)","Pos(Y)","Heading","Speed(MPH)","Load Capacity(lb)","Battery Capacity(%)","CARGO"));
+		System.out.println(tb1.toFormattedString());
+		
+		System.out.println("--------------------------------------------------------------------------");
+		System.out.println("Saving to 'boats.txt'");
+		System.out.println("--------------------------------------------------------------------------");
+		
+		Boat[] boatListUpdated = new Boat[6];
+		for (int i=0; i <boatList.length; i++) {
+			boatListUpdated[i] = boatList[i];
+		} 
+		boatListUpdated[5] =tb1;
+		BoatIO bio = new BoatIO();
+		bio.saveBoat(boatListUpdated, "boats.txt");	
+		
+		System.out.println("--------------------------------------------------------------------------");
+		System.out.println("Loading from 'boats.txt' and displaying");
+		System.out.println("--------------------------------------------------------------------------");
+		
+		Boat[] boatListLoaded = new Boat[6];
+		System.out.println(String.format("%1$7s %2$6s %3$6s %4$8s %5$11s %6$18s %7$20s %8$5s","Name","Pos(X)","Pos(Y)","Heading","Speed(MPH)","Load Capacity(lb)","Battery Capacity(%)","CARGO"));
+		bio.loadBoat(boatListLoaded, "boats.txt");
 		System.out.println("----------------------------- Boat Test End -------------------------------");
-		
-		
+	
 		
 	}
 	

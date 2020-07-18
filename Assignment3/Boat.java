@@ -128,7 +128,7 @@ class Boat {
 
 	//Method to print formatted Boat Instance Details 
 	public String toFormattedString() {
-		String st = String.format("%1$6s %2$5d %3$6d %4$8s° %5$10s %6$18s %7$20s ", getBoatName(),getPosX(),getPosY(),getHeading(),getSpeed(),getLoadCapacity(),getBatteryCapacity() );
+		String st = String.format("%1$7s %2$5d %3$6d %4$8s° %5$10s %6$18s %7$20s ", getBoatName(),getPosX(),getPosY(),getHeading(),getSpeed(),getLoadCapacity(),getBatteryCapacity() );
 		return st;
 	}
 	
