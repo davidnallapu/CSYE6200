@@ -1,4 +1,5 @@
-package assignment3;
+
+import java.time.LocalDateTime;
 /*
 Assignment 2AB: Cleaning Boat Scheduler
 Name: David Nallapu
@@ -85,25 +86,27 @@ public class BoatTest {
 		System.out.println(String.format("%1$7s %2$6s %3$6s %4$8s %5$11s %6$18s %7$20s %8$5s","Name","Pos(X)","Pos(Y)","Heading","Speed(MPH)","Load Capacity(lb)","Battery Capacity(%)","CARGO"));
 		System.out.println(tb1.toFormattedString());
 		
-		System.out.println("--------------------------------------------------------------------------");
-		System.out.println("Saving to 'boats.txt'");
-		System.out.println("--------------------------------------------------------------------------");
-		
+		LocalDateTime fileName = LocalDateTime.now(); 
+		System.out.println("\n--------------------------------------------------------------------------");
+		System.out.printf("Saving 5 Boats and 1 Transpoart Boat to '%0$s.txt' \n\n",fileName.toString());		
 		Boat[] boatListUpdated = new Boat[6];
 		for (int i=0; i <boatList.length; i++) {
 			boatListUpdated[i] = boatList[i];
 		} 
 		boatListUpdated[5] =tb1;
 		BoatIO bio = new BoatIO();
-		bio.saveBoat(boatListUpdated, "boats.txt");	
+		 
 		
+		bio.saveBoat(boatListUpdated, fileName.toString()+".txt");	
+		System.out.println("--------------------------------------------------------------------------\n");
+
 		System.out.println("--------------------------------------------------------------------------");
-		System.out.println("Loading from 'boats.txt' and displaying");
-		System.out.println("--------------------------------------------------------------------------");
+		System.out.printf("Loading from '%0$s.txt' and displaying 5 Boat objects and 1 TransportBoat object\n",fileName.toString());
+		System.out.println("--------------------------------------------------------------------------\n");
 		
 		Boat[] boatListLoaded = new Boat[6];
 		System.out.println(String.format("%1$7s %2$6s %3$6s %4$8s %5$11s %6$18s %7$20s %8$5s","Name","Pos(X)","Pos(Y)","Heading","Speed(MPH)","Load Capacity(lb)","Battery Capacity(%)","CARGO"));
-		bio.loadBoat(boatListLoaded, "boats.txt");
+		bio.loadBoat(boatListLoaded, fileName.toString()+".txt");
 		System.out.println("----------------------------- Boat Test End -------------------------------");
 	
 		

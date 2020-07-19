@@ -1,4 +1,3 @@
-package assignment3;
 /*
 Assignment 2AB: Cleaning Boat Scheduler
 Name: David Nallapu

@@ -1,4 +1,4 @@
-package assignment3;
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -56,9 +56,9 @@ public class BoatIO {
 			}
 			System.out.println();
 			reader.close();
-			System.out.println("Deleting File");
-			file.delete();
-			System.out.println("Deleted");
+//			System.out.println("Deleting File");
+//			file.delete();
+//			System.out.println("Deleted");
 			
 			
 		} catch (FileNotFoundException e) {
