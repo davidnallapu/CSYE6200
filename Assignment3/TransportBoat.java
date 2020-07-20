@@ -1,3 +1,8 @@
+/*
+Assignment 3: Cleaning Boat IO
+Name: David Nallapu
+NUID : 001530978
+*/
 
 public class TransportBoat extends Boat {
 
@@ -12,11 +17,11 @@ public class TransportBoat extends Boat {
 		this.length =length;
 		this.width = width;
 	}
-	
-	
+	//Using super to print Cargo along with details inherited from Boat class.
 	public String toFormattedString() {
 		return (super.toFormattedString() + "  "+cargoArea());
 	}
+	//method to return cargo 
 	public int cargoArea() {
 		return this.height*this.width*this.length;
 	}

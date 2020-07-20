@@ -1,10 +1,10 @@
 
-import java.time.LocalDateTime;
 /*
-Assignment 2AB: Cleaning Boat Scheduler
+Assignment 3: Cleaning Boat IO
 Name: David Nallapu
 NUID : 001530978
 */
+import java.time.LocalDateTime;
 
 public class BoatTest {
 
@@ -78,28 +78,32 @@ public class BoatTest {
 		bs.printTasks();
 		
 		System.out.println("------------- Testing TranspoartBoat and BoatIO -------------\n");
-		
+		//Creating a TranspoartBoat Instance
 		TransportBoat tb1 =  new TransportBoat("T"+boatList[0].boatName, boatList[0].posX, boatList[0].posY, boatList[0].heading, boatList[0].speed, boatList[0].loadCapacity, boatList[0].batteryCapacity, 10, 20, 30);
 		System.out.println("--------------------------------------------------------------------------");
 		System.out.println("Initializing TranspoartBoat object with CARGO calculated");
 		System.out.println("--------------------------------------------------------------------------");
 		System.out.println(String.format("%1$7s %2$6s %3$6s %4$8s %5$11s %6$18s %7$20s %8$5s","Name","Pos(X)","Pos(Y)","Heading","Speed(MPH)","Load Capacity(lb)","Battery Capacity(%)","CARGO"));
-		System.out.println(tb1.toFormattedString());
+		System.out.println(tb1.toFormattedString());//Printing CARGO with super and updated method
 		
+		//Using Date and time as file name.
 		LocalDateTime fileName = LocalDateTime.now(); 
 		System.out.println("\n--------------------------------------------------------------------------");
 		System.out.printf("Saving 5 Boats and 1 Transpoart Boat to '%0$s.txt' \n\n",fileName.toString());		
+		
+		//Creating a Boat Array to store the previous instances and a new TranspoartBoat 
 		Boat[] boatListUpdated = new Boat[6];
 		for (int i=0; i <boatList.length; i++) {
 			boatListUpdated[i] = boatList[i];
 		} 
 		boatListUpdated[5] =tb1;
+
+		//Saving Updated Boat Array in a txt file with BoatIO method
 		BoatIO bio = new BoatIO();
-		 
-		
 		bio.saveBoat(boatListUpdated, fileName.toString()+".txt");	
 		System.out.println("--------------------------------------------------------------------------\n");
 
+		// Loading Boat Objects into boatListLoaded Array to display on console
 		System.out.println("--------------------------------------------------------------------------");
 		System.out.printf("Loading from '%0$s.txt' and displaying 5 Boat objects and 1 TransportBoat object\n",fileName.toString());
 		System.out.println("--------------------------------------------------------------------------\n");
@@ -107,9 +111,9 @@ public class BoatTest {
 		Boat[] boatListLoaded = new Boat[6];
 		System.out.println(String.format("%1$7s %2$6s %3$6s %4$8s %5$11s %6$18s %7$20s %8$5s","Name","Pos(X)","Pos(Y)","Heading","Speed(MPH)","Load Capacity(lb)","Battery Capacity(%)","CARGO"));
 		bio.loadBoat(boatListLoaded, fileName.toString()+".txt");
+		//This will generate 5 new Boat Instances and 1 new TranspoartBoat Instance. The benefit is that the data will be the same in the new instances. 
 		System.out.println("----------------------------- Boat Test End -------------------------------");
 	
-		
 	}
 	
 	public static void main(String[] args) {		
