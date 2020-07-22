@@ -1,8 +1,9 @@
 /*
-Assignment 3: Cleaning Boat IO
+Assignment 4: Cleaning Boat Simulation
 Name: David Nallapu
 NUID : 001530978
 */
+package edu.neu.csye6200.boat;
 
 public class TransportBoat extends Boat {
 

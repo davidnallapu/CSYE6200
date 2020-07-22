@@ -1,0 +1,300 @@
+--------------------------------------- Boat Test Starting(Updated with BoatSimulation class and Logging) ---------------------------------------
+
+  Name Pos(X) Pos(Y)  Heading  Speed(MPH)  Load Capacity(lb)  Battery Capacity(%) 
+ Boat 1     0      0       90°       10.0               20.0                   10 
+ Boat 2     1      2       45°       12.0               30.0                   20 
+ Boat 3     2      3      180°       14.0               40.0                   30 
+ Boat 4     3      4      270°       16.0               50.0                   40 
+ Boat 5     4      5       90°       18.0               25.0                   50 
+--------------------------------------- Testing BoatScheduler and BoatTask class ---------------------------------------
+
+Logger File 'BoatServer.log' created.
+Jul 22, 2020 4:58:02 PM edu.neu.csye6200.boat.BoatScheduler <init>
+INFO: CONSTRUCTOR CALL : Singleton construction of BoatScheduler created. 
+--------------------------------------------------------------------------
+Adding 10 Tasks to ArrayList and HashMap
+--------------------------------------------------------------------------
+Original tasks ArrayList : 
+Task ID    Name        Objective Start Date   Assigned Boat 
+     3   Task 3  Clean up Area 3 10-11-2020          Boat 1
+    10  Task 10  Clean up Area 6 10-12-2019          Boat 2
+     9   Task 9  Clean up Area 9 10-13-2020          Boat 3
+     4   Task 4  Clean up Area 4 10-14-2019          Boat 4
+     8   Task 8  Clean up Area 8 10-15-2020          Boat 5
+     2   Task 2  Clean up Area 2 10-16-2019          Boat 1
+     1   Task 1  Clean up Area 1 10-17-2020          Boat 2
+     5   Task 5  Clean up Area 4 10-18-2019          Boat 3
+     6   Task 6 Clean up Area 10 10-19-2020          Boat 4
+     7   Task 7  Clean up Area 5 20-12-2019          Boat 5
+
+Sorted tasks ArrayList : 
+Task ID    Name        Objective Start Date   Assigned Boat 
+     1   Task 1  Clean up Area 1 10-17-2020          Boat 2
+     2   Task 2  Clean up Area 2 10-16-2019          Boat 1
+     3   Task 3  Clean up Area 3 10-11-2020          Boat 1
+     4   Task 4  Clean up Area 4 10-14-2019          Boat 4
+     5   Task 5  Clean up Area 4 10-18-2019          Boat 3
+     6   Task 6 Clean up Area 10 10-19-2020          Boat 4
+     7   Task 7  Clean up Area 5 20-12-2019          Boat 5
+     8   Task 8  Clean up Area 8 10-15-2020          Boat 5
+     9   Task 9  Clean up Area 9 10-13-2020          Boat 3
+    10  Task 10  Clean up Area 6 10-12-2019          Boat 2
+--------------------------------------- Testing TranspoartBoat and BoatIO ---------------------------------------
+
+--------------------------------------------------------------------------
+Initializing TranspoartBoat object with CARGO calculated
+--------------------------------------------------------------------------
+   Name Pos(X) Pos(Y)  Heading  Speed(MPH)  Load Capacity(lb)  Battery Capacity(%) CARGO
+TBoat 1     0      0       90°       10.0               20.0                   10   600
+
+--------------------------------------------------------------------------
+Saving 5 Boats and 1 Transpoart Boat to '2020-07-22T16:58:02.472.txt' 
+
+Jul 22, 2020 4:58:02 PM edu.neu.csye6200.boat.BoatIO saveBoat
+INFO: Logging : saveBoat method() called to save each Boat from boatList
+Jul 22, 2020 4:58:02 PM edu.neu.csye6200.boat.BoatIO save
+INFO: Logging : save method() called with edu.neu.csye6200.boat.Boat@3d075dc0 and File 2020-07-22T16:58:02.472.txt as parameters
+Jul 22, 2020 4:58:02 PM edu.neu.csye6200.boat.BoatIO save
+INFO: Logging : save method() called with edu.neu.csye6200.boat.Boat@214c265e and File 2020-07-22T16:58:02.472.txt as parameters
+Jul 22, 2020 4:58:02 PM edu.neu.csye6200.boat.BoatIO save
+INFO: Logging : save method() called with edu.neu.csye6200.boat.Boat@448139f0 and File 2020-07-22T16:58:02.472.txt as parameters
+Jul 22, 2020 4:58:02 PM edu.neu.csye6200.boat.BoatIO save
+INFO: Logging : save method() called with edu.neu.csye6200.boat.Boat@7cca494b and File 2020-07-22T16:58:02.472.txt as parameters
+Jul 22, 2020 4:58:02 PM edu.neu.csye6200.boat.BoatIO save
+INFO: Logging : save method() called with edu.neu.csye6200.boat.Boat@7ba4f24f and File 2020-07-22T16:58:02.472.txt as parameters
+Jul 22, 2020 4:58:02 PM edu.neu.csye6200.boat.BoatIO save
+INFO: Logging : save method() called with edu.neu.csye6200.boat.TransportBoat@7b23ec81 and File 2020-07-22T16:58:02.472.txt as parameters
+Location Saved : /Users/davidnallapu/eclipse-workspace/OOD/2020-07-22T16:58:02.472.txt
+--------------------------------------------------------------------------
+
+--------------------------------------------------------------------------
+Loading from '2020-07-22T16:58:02.472.txt' and displaying 5 Boat objects and 1 TransportBoat object
+--------------------------------------------------------------------------
+
+Jul 22, 2020 4:58:02 PM edu.neu.csye6200.boat.BoatIO loadBoat
+INFO: Logging : loadBethod mmethod() to load info from txt file
+   Name Pos(X) Pos(Y)  Heading  Speed(MPH)  Load Capacity(lb)  Battery Capacity(%) CARGO
+ Boat 1     0      0       90°       10.0               20.0                   10 
+ Boat 2     1      2       45°       12.0               30.0                   20 
+ Boat 3     2      3      180°       14.0               40.0                   30 
+ Boat 4     3      4      270°       16.0               50.0                   40 
+ Boat 5     4      5       90°       18.0               25.0                   50 
+TBoat 1     0      0       90°       10.0               20.0                   10   600
+
+--------------------------------------- TESTING BoatSimulation ---------------------------------------
+
+================================Starting Simulation with Boat 1================================
+
+Original Position : (0, 0)
+
+Moving to Position : (4, 6)
+Moving 4 steps in Direction : 'N'
+(1,0), (2,0), (3,0), (4,0), 
+Moving 6 steps in Direction : 'E'
+(4,1), (4,2), (4,3), (4,4), (4,5), (4,6), 
+
+Moving to Position : (2, 13)
+Moving 2 steps in Direction : 'S'
+(3,6), (2,6), 
+Moving 7 steps in Direction : 'E'
+(2,7), (2,8), (2,9), (2,10), (2,11), (2,12), (2,13), 
+
+Moving to Position : (9, 6)
+Moving 7 steps in Direction : 'N'
+(3,13), (4,13), (5,13), (6,13), (7,13), (8,13), (9,13), 
+Moving 7 steps in Direction : 'W'
+(9,12), (9,11), (9,10), (9,9), (9,8), (9,7), (9,6), 
+
+Moving to Position : (4, 9)
+Moving 5 steps in Direction : 'S'
+(8,6), (7,6), (6,6), (5,6), (4,6), 
+Moving 3 steps in Direction : 'E'
+(4,7), (4,8), (4,9), 
+
+Moving to Position : (11, 14)
+Moving 7 steps in Direction : 'N'
+(5,9), (6,9), (7,9), (8,9), (9,9), (10,9), (11,9), 
+Moving 5 steps in Direction : 'E'
+(11,10), (11,11), (11,12), (11,13), (11,14), 
+
+Final Position : (11, 14)
+
+================================Starting Simulation with Boat 2================================
+
+Original Position : (1, 2)
+
+Moving to Position : (15, 10)
+Moving 14 steps in Direction : 'N'
+(2,2), (3,2), (4,2), (5,2), (6,2), (7,2), (8,2), (9,2), (10,2), (11,2), (12,2), (13,2), (14,2), (15,2), 
+Moving 8 steps in Direction : 'E'
+(15,3), (15,4), (15,5), (15,6), (15,7), (15,8), (15,9), (15,10), 
+
+Moving to Position : (9, 10)
+Moving 6 steps in Direction : 'S'
+(14,10), (13,10), (12,10), (11,10), (10,10), (9,10), 
+
+
+Moving to Position : (15, 0)
+Moving 6 steps in Direction : 'N'
+(10,10), (11,10), (12,10), (13,10), (14,10), (15,10), 
+Moving 10 steps in Direction : 'W'
+(15,9), (15,8), (15,7), (15,6), (15,5), (15,4), (15,3), (15,2), (15,1), (15,0), 
+
+Moving to Position : (10, 16)
+Moving 5 steps in Direction : 'S'
+(14,0), (13,0), (12,0), (11,0), (10,0), 
+Moving 16 steps in Direction : 'E'
+(10,1), (10,2), (10,3), (10,4), (10,5), (10,6), (10,7), (10,8), (10,9), (10,10), (10,11), (10,12), (10,13), (10,14), (10,15), (10,16), 
+
+Moving to Position : (15, 9)
+Moving 5 steps in Direction : 'N'
+(11,16), (12,16), (13,16), (14,16), (15,16), 
+Moving 7 steps in Direction : 'W'
+(15,15), (15,14), (15,13), (15,12), (15,11), (15,10), (15,9), 
+
+Final Position : (15, 9)
+
+================================Starting Simulation with Boat 3================================
+
+Original Position : (2, 3)
+
+Moving to Position : (14, 15)
+Moving 12 steps in Direction : 'N'
+(3,3), (4,3), (5,3), (6,3), (7,3), (8,3), (9,3), (10,3), (11,3), (12,3), (13,3), (14,3), 
+Moving 12 steps in Direction : 'E'
+(14,4), (14,5), (14,6), (14,7), (14,8), (14,9), (14,10), (14,11), (14,12), (14,13), (14,14), (14,15), 
+
+Moving to Position : (2, 10)
+Moving 12 steps in Direction : 'S'
+(13,15), (12,15), (11,15), (10,15), (9,15), (8,15), (7,15), (6,15), (5,15), (4,15), (3,15), (2,15), 
+Moving 5 steps in Direction : 'W'
+(2,14), (2,13), (2,12), (2,11), (2,10), 
+
+Moving to Position : (2, 11)
+
+Moving 1 steps in Direction : 'E'
+(2,11), 
+
+Moving to Position : (17, 3)
+Moving 15 steps in Direction : 'N'
+(3,11), (4,11), (5,11), (6,11), (7,11), (8,11), (9,11), (10,11), (11,11), (12,11), (13,11), (14,11), (15,11), (16,11), (17,11), 
+Moving 8 steps in Direction : 'W'
+(17,10), (17,9), (17,8), (17,7), (17,6), (17,5), (17,4), (17,3), 
+
+Moving to Position : (11, 7)
+Moving 6 steps in Direction : 'S'
+(16,3), (15,3), (14,3), (13,3), (12,3), (11,3), 
+Moving 4 steps in Direction : 'E'
+(11,4), (11,5), (11,6), (11,7), 
+
+Final Position : (11, 7)
+
+================================Starting Simulation with Boat 4================================
+
+Original Position : (3, 4)
+
+Moving to Position : (16, 18)
+Moving 13 steps in Direction : 'N'
+(4,4), (5,4), (6,4), (7,4), (8,4), (9,4), (10,4), (11,4), (12,4), (13,4), (14,4), (15,4), (16,4), 
+Moving 14 steps in Direction : 'E'
+(16,5), (16,6), (16,7), (16,8), (16,9), (16,10), (16,11), (16,12), (16,13), (16,14), (16,15), (16,16), (16,17), (16,18), 
+
+Moving to Position : (5, 13)
+Moving 11 steps in Direction : 'S'
+(15,18), (14,18), (13,18), (12,18), (11,18), (10,18), (9,18), (8,18), (7,18), (6,18), (5,18), 
+Moving 5 steps in Direction : 'W'
+(5,17), (5,16), (5,15), (5,14), (5,13), 
+
+Moving to Position : (7, 0)
+Moving 2 steps in Direction : 'N'
+(6,13), (7,13), 
+Moving 13 steps in Direction : 'W'
+(7,12), (7,11), (7,10), (7,9), (7,8), (7,7), (7,6), (7,5), (7,4), (7,3), (7,2), (7,1), (7,0), 
+
+Moving to Position : (13, 5)
+Moving 6 steps in Direction : 'N'
+(8,0), (9,0), (10,0), (11,0), (12,0), (13,0), 
+Moving 5 steps in Direction : 'E'
+(13,1), (13,2), (13,3), (13,4), (13,5), 
+
+Moving to Position : (8, 12)
+Moving 5 steps in Direction : 'S'
+(12,5), (11,5), (10,5), (9,5), (8,5), 
+Moving 7 steps in Direction : 'E'
+(8,6), (8,7), (8,8), (8,9), (8,10), (8,11), (8,12), 
+
+Final Position : (8, 12)
+
+================================Starting Simulation with Boat 5================================
+
+Original Position : (4, 5)
+
+Moving to Position : (2, 5)
+Moving 2 steps in Direction : 'S'
+(3,5), (2,5), 
+
+
+Moving to Position : (15, 15)
+Moving 13 steps in Direction : 'N'
+(3,5), (4,5), (5,5), (6,5), (7,5), (8,5), (9,5), (10,5), (11,5), (12,5), (13,5), (14,5), (15,5), 
+Moving 10 steps in Direction : 'E'
+(15,6), (15,7), (15,8), (15,9), (15,10), (15,11), (15,12), (15,13), (15,14), (15,15), 
+
+Moving to Position : (18, 14)
+Moving 3 steps in Direction : 'N'
+(16,15), (17,15), (18,15), 
+Moving 1 steps in Direction : 'W'
+(18,14), 
+
+Moving to Position : (7, 12)
+Moving 11 steps in Direction : 'S'
+(17,14), (16,14), (15,14), (14,14), (13,14), (12,14), (11,14), (10,14), (9,14), (8,14), (7,14), 
+Moving 2 steps in Direction : 'W'
+(7,13), (7,12), 
+
+Moving to Position : (12, 7)
+Moving 5 steps in Direction : 'N'
+(8,12), (9,12), (10,12), (11,12), (12,12), 
+Moving 5 steps in Direction : 'W'
+(12,11), (12,10), (12,9), (12,8), (12,7), 
+
+Final Position : (12, 7)
+
+================================Starting Simulation with TBoat 1================================
+
+Original Position : (0, 0)
+
+Moving to Position : (13, 16)
+Moving 13 steps in Direction : 'N'
+(1,0), (2,0), (3,0), (4,0), (5,0), (6,0), (7,0), (8,0), (9,0), (10,0), (11,0), (12,0), (13,0), 
+Moving 16 steps in Direction : 'E'
+(13,1), (13,2), (13,3), (13,4), (13,5), (13,6), (13,7), (13,8), (13,9), (13,10), (13,11), (13,12), (13,13), (13,14), (13,15), (13,16), 
+
+Moving to Position : (18, 16)
+Moving 5 steps in Direction : 'N'
+(14,16), (15,16), (16,16), (17,16), (18,16), 
+
+
+Moving to Position : (11, 0)
+Moving 7 steps in Direction : 'S'
+(17,16), (16,16), (15,16), (14,16), (13,16), (12,16), (11,16), 
+Moving 16 steps in Direction : 'W'
+(11,15), (11,14), (11,13), (11,12), (11,11), (11,10), (11,9), (11,8), (11,7), (11,6), (11,5), (11,4), (11,3), (11,2), (11,1), (11,0), 
+
+Moving to Position : (6, 11)
+Moving 5 steps in Direction : 'S'
+(10,0), (9,0), (8,0), (7,0), (6,0), 
+Moving 11 steps in Direction : 'E'
+(6,1), (6,2), (6,3), (6,4), (6,5), (6,6), (6,7), (6,8), (6,9), (6,10), (6,11), 
+
+Moving to Position : (18, 8)
+Moving 12 steps in Direction : 'N'
+(7,11), (8,11), (9,11), (10,11), (11,11), (12,11), (13,11), (14,11), (15,11), (16,11), (17,11), (18,11), 
+Moving 3 steps in Direction : 'W'
+(18,10), (18,9), (18,8), 
+
+Final Position : (18, 8)
+
+--------------------------------------- End of Simulation ---------------------------------------
+
+--------------------------------------- Boat Test End ---------------------------------------
