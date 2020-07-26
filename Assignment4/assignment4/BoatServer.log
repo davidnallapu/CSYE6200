@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2020-07-23T21:47:27</date>
+  <millis>1595521047141</millis>
+  <sequence>0</sequence>
+  <logger>BoatScheduler</logger>
+  <level>INFO</level>
+  <class>BoatScheduler</class>
+  <method>&lt;init&gt;</method>
+  <thread>1</thread>
+  <message>CONSTRUCTOR CALL : Singleton construction of BoatScheduler created. </message>
+</record>
+<record>
+  <date>2020-07-23T21:47:27</date>
+  <millis>1595521047254</millis>
+  <sequence>1</sequence>
+  <logger>BoatScheduler</logger>
+  <level>INFO</level>
+  <class>BoatIO</class>
+  <method>saveBoat</method>
+  <thread>1</thread>
+  <message>Logging : saveBoat method() called to save each Boat from boatList</message>
+</record>
+<record>
+  <date>2020-07-23T21:47:27</date>
+  <millis>1595521047256</millis>
+  <sequence>2</sequence>
+  <logger>BoatScheduler</logger>
+  <level>INFO</level>
+  <class>BoatIO</class>
+  <method>save</method>
+  <thread>1</thread>
+  <message>Logging : save method() called with Boat@448139f0 and File 2020-07-23T21:47:27.250.txt as parameters</message>
+</record>
+<record>
+  <date>2020-07-23T21:47:27</date>
+  <millis>1595521047258</millis>
+  <sequence>3</sequence>
+  <logger>BoatScheduler</logger>
+  <level>INFO</level>
+  <class>BoatIO</class>
+  <method>save</method>
+  <thread>1</thread>
+  <message>Logging : save method() called with Boat@7cca494b and File 2020-07-23T21:47:27.250.txt as parameters</message>
+</record>
+<record>
+  <date>2020-07-23T21:47:27</date>
+  <millis>1595521047259</millis>
+  <sequence>4</sequence>
+  <logger>BoatScheduler</logger>
+  <level>INFO</level>
+  <class>BoatIO</class>
+  <method>save</method>
+  <thread>1</thread>
+  <message>Logging : save method() called with Boat@3d075dc0 and File 2020-07-23T21:47:27.250.txt as parameters</message>
+</record>
+<record>
+  <date>2020-07-23T21:47:27</date>
+  <millis>1595521047262</millis>
+  <sequence>5</sequence>
+  <logger>BoatScheduler</logger>
+  <level>INFO</level>
+  <class>BoatIO</class>
+  <method>save</method>
+  <thread>1</thread>
+  <message>Logging : save method() called with Boat@214c265e and File 2020-07-23T21:47:27.250.txt as parameters</message>
+</record>
+<record>
+  <date>2020-07-23T21:47:27</date>
+  <millis>1595521047263</millis>
+  <sequence>6</sequence>
+  <logger>BoatScheduler</logger>
+  <level>INFO</level>
+  <class>BoatIO</class>
+  <method>save</method>
+  <thread>1</thread>
+  <message>Logging : save method() called with Boat@7ba4f24f and File 2020-07-23T21:47:27.250.txt as parameters</message>
+</record>
+<record>
+  <date>2020-07-23T21:47:27</date>
+  <millis>1595521047264</millis>
+  <sequence>7</sequence>
+  <logger>BoatScheduler</logger>
+  <level>INFO</level>
+  <class>BoatIO</class>
+  <method>save</method>
+  <thread>1</thread>
+  <message>Logging : save method() called with TransportBoat@7b23ec81 and File 2020-07-23T21:47:27.250.txt as parameters</message>
+</record>
+<record>
+  <date>2020-07-23T21:47:27</date>
+  <millis>1595521047266</millis>
+  <sequence>8</sequence>
+  <logger>BoatScheduler</logger>
+  <level>INFO</level>
+  <class>BoatIO</class>
+  <method>loadBoat</method>
+  <thread>1</thread>
+  <message>Logging : loadBethod mmethod() to load info from txt file</message>
+</record>
+</log>
