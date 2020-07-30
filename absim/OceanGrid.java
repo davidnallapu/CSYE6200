@@ -3,10 +3,11 @@ package edu.neu.csye6200.absim;
 import java.util.ArrayList;
 
 
-public class OceanGrid {
+public class OceanGrid implements Runnable{
 	int R;
 	int C;
 	int oilSpread;
+	private boolean done = false;
 	//Default constructor 
 	OceanGrid(){}
 	
@@ -45,7 +46,9 @@ public class OceanGrid {
     }    
     
     public void spreadOil(){
-    	
+    	if(borderOil.size()==0) {
+    		done =true;
+    	}
     	for(OceanGrid gb: borderOil) {
     		if(gb.oilSpread<100) {
     			gb.oilSpread+=20;
@@ -57,7 +60,7 @@ public class OceanGrid {
     		}
     	}
     	abPanel.repaint();
-    	try{ Thread.sleep(100); } catch(Exception e){};
+    	try{ Thread.sleep(10); } catch(Exception e){};
     }
 	
     public void updateGrid(OceanGrid gb) {
@@ -107,48 +110,13 @@ public class OceanGrid {
     	}
     	oilSpreadPerc=oilSpreadPerc*100/(gridHeight*gridWidth);
     }
+
+	@Override
+	public void run() {
+		while(!done )
+		spreadOil();
+	}
     
-//    public void boatTravel(int i , int j) {
-//    	if(i==gridHeight/2 && j==gridWidth/2) {
-//    		return;
-//    	}
-//    	else {
-//    	int loopi =i;
-//    	int loopj = j;
-//    	int gridH=gridHeight-i;
-//    	int gridW=gridWidth-i;
-//    	while(loopj<gridH-1) {
-//    		if(gridData[loopi][loopj].oilSpread>0)
-//    			gridData[loopi][loopj].oilSpread-=100;
-//    		abPanel.repaint();
-//    		
-//    		try{ Thread.sleep(10); } catch(Exception e){};
-//    		loopj++;
-//    	}
-//    	while(loopi<gridW-1) {
-//    		if(gridData[loopi][loopj].oilSpread>0)
-//        		gridData[loopi][loopj].oilSpread-=100;
-//    		abPanel.repaint();
-//    		try{ Thread.sleep(10); } catch(Exception e){};
-//    		loopi++;
-//    	}
-//    	while(loopj>j) {
-//    		if(gridData[loopi][loopj].oilSpread>0)
-//        		gridData[loopi][loopj].oilSpread-=100;
-//    		abPanel.repaint();
-//    		try{ Thread.sleep(10); } catch(Exception e){};
-//    		loopj--;
-//    	}
-//    	while(loopi>i) {
-//    		if(gridData[loopi][loopj].oilSpread>0)
-//        		gridData[loopi][loopj].oilSpread-=100;
-//    		abPanel.repaint();
-//    		try{ Thread.sleep(10); } catch(Exception e){};
-//    		loopi--;
-//    	}
-//    	boatTravel(i+1,j+1);
-//    	}    	
-//    }
     
 }
 

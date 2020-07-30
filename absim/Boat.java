@@ -2,9 +2,9 @@ package edu.neu.csye6200.absim;
 
 class Boat {
 	//Declaring variables for Boat class
-	String boatName, direction;
-	int posX, posY,heading, batteryCapacity;
-	double speed, loadCapacity;
+	private String boatName, direction;
+	private int posX, posY,heading, batteryCapacity;
+	private double speed, loadCapacity;
 	
 	Boat(String boatName, int posX,int posY,int heading, String direction, double speed,double loadCapacity, int batteryCapacity ){
 		setBoatName(boatName);

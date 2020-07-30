@@ -1,66 +1,77 @@
 package edu.neu.csye6200.absim;
 
-public class ABRule {
+public class ABRule implements Runnable{
+	private boolean done = false;
+	Boat bt = new Boat("Cleaner", 0, 0, 90,"E", 100, 10, 100);
 	OceanGrid og = new OceanGrid();
 	
-	public void boatTravel(Boat bt) {
-    	if(bt.posX==og.gridHeight/2 && bt.posY==og.gridWidth/2) {
-    		return;
+	public void boatTravel() {
+    	if(bt.getPosX()==OceanGrid.gridHeight/2 && bt.getPosY()==OceanGrid.gridWidth/2) {
+    		done =true;
     	}
     	else {
-    	int loopi =bt.posX;
-    	int loopj = bt.posY;
-    	int gridH=og.gridHeight-bt.posX;
-    	int gridW=og.gridWidth-bt.posY;
+    	int loopi =bt.getPosX();
+    	int loopj = bt.getPosY();
+    	int gridH=OceanGrid.gridHeight-bt.getPosX();
+    	int gridW=OceanGrid.gridWidth-bt.getPosY();
     	while(loopj<gridH-1) {
-    		bt.direction="W";
-    		if(og.gridData[loopi][loopj].oilSpread>0)
-    			og.gridData[loopi][loopj].oilSpread-=100;
-    		og.abPanel.repaint();
+    		bt.setDirection("W");
+    		if(OceanGrid.gridData[loopi][loopj].oilSpread>=0)
+    			{OceanGrid.gridData[loopi][loopj].oilSpread-=100;
+    			OceanGrid.borderOil.remove(OceanGrid.gridData[loopi][loopj]);}
+    		OceanGrid.abPanel.repaint();
     		
-    		try{ Thread.sleep((int)(1000/bt.speed)); } catch(Exception e){};
+    		try{ Thread.sleep((int)(1000/bt.getSpeed())); } catch(Exception e){};
     		loopj++;
     		og.getOilSpread();
     		
-    		System.out.println("Boat Cleanup (% remaining) :"+og.oilSpreadPerc+ "\nDirection : "+ bt.direction+"\nSpeed : "+bt.speed);
+    		System.out.println("Boat Cleanup (% remaining) :"+OceanGrid.oilSpreadPerc+ "\nDirection : "+ bt.getDirection()+"\nSpeed : "+bt.getSpeed());
     	}
     	while(loopi<gridW-1) {
-    		bt.direction="S";
-    		if(og.gridData[loopi][loopj].oilSpread>0)
-    			og.gridData[loopi][loopj].oilSpread-=100;
-    		og.abPanel.repaint();
-    		try{ Thread.sleep((int)(1000/bt.speed)); } catch(Exception e){};
+    		bt.setDirection("S");
+    		if(OceanGrid.gridData[loopi][loopj].oilSpread>=0)
+    			{OceanGrid.gridData[loopi][loopj].oilSpread-=100;
+    			OceanGrid.borderOil.remove(OceanGrid.gridData[loopi][loopj]);}
+    			
+    		OceanGrid.abPanel.repaint();
+    		try{ Thread.sleep((int)(1000/bt.getSpeed())); } catch(Exception e){};
     		loopi++;
     		og.getOilSpread();
-    		System.out.println("Boat Cleanup (% remaining) :"+og.oilSpreadPerc+ "\nDirection : "+ bt.direction+"\nSpeed : "+bt.speed);
+    		System.out.println("Boat Cleanup (% remaining) :"+OceanGrid.oilSpreadPerc+ "\nDirection : "+ bt.getDirection()+"\nSpeed : "+bt.getSpeed());
     	}
-    	while(loopj>bt.posY) {
-    		bt.direction="E";
-    		if(og.gridData[loopi][loopj].oilSpread>0)
-    			og.gridData[loopi][loopj].oilSpread-=100;
-    		og.abPanel.repaint();
-    		try{ Thread.sleep((int)(1000/bt.speed)); } catch(Exception e){};
+    	while(loopj>bt.getPosY()) {
+    		bt.setDirection("E");
+    		if(OceanGrid.gridData[loopi][loopj].oilSpread>=0)
+    			{OceanGrid.gridData[loopi][loopj].oilSpread-=100;
+    			OceanGrid.borderOil.remove(OceanGrid.gridData[loopi][loopj]);}
+    			
+    		OceanGrid.abPanel.repaint();
+    		try{ Thread.sleep((int)(1000/bt.getSpeed())); } catch(Exception e){};
     		loopj--;
     		og.getOilSpread();
-    		System.out.println("Boat Cleanup (% remaining) :"+og.oilSpreadPerc+ "\nDirection : "+ bt.direction+"\nSpeed : "+bt.speed);
+    		System.out.println("Boat Cleanup (% remaining) :"+OceanGrid.oilSpreadPerc+ "\nDirection : "+ bt.getDirection()+"\nSpeed : "+bt.getSpeed());
     	}
-    	while(loopi>bt.posX) {
-    		bt.direction="N";
-    		if(og.gridData[loopi][loopj].oilSpread>0)
-    			og.gridData[loopi][loopj].oilSpread-=100;
-    		og.abPanel.repaint();
-    		try{ Thread.sleep((int)(1000/bt.speed)); } catch(Exception e){};
+    	while(loopi>bt.getPosX()) {
+    		bt.setDirection("N");
+    		if(OceanGrid.gridData[loopi][loopj].oilSpread>=0)
+    			{OceanGrid.gridData[loopi][loopj].oilSpread-=100;
+    			OceanGrid.borderOil.remove(OceanGrid.gridData[loopi][loopj]);}
+    		OceanGrid.abPanel.repaint();
+    		try{ Thread.sleep((int)(1000/bt.getSpeed())); } catch(Exception e){};
     		loopi--;
     		og.getOilSpread();
-    		System.out.println("Boat Cleanup (% remaining) :"+og.oilSpreadPerc+ "\nDirection : "+ bt.direction+"\nSpeed : "+bt.speed);
+    		System.out.println("Boat Cleanup (% remaining) :"+OceanGrid.oilSpreadPerc+ "\nDirection : "+ bt.getDirection()+"\nSpeed : "+bt.getSpeed());
     	}
-    	bt.posX+=1;
-    	bt.posY+=1;
-    	boatTravel(bt);
-    	
+    	bt.setBatteryCapacity(bt.getBatteryCapacity()-10);
+    	bt.moveTo(bt.getPosX()+1, bt.getPosY()+1);
     	}
     	   	
 }
+	public void run() {
+		while(!done) {
+			boatTravel();
+		}
+	}
 
 
 }
