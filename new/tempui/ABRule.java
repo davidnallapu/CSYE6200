@@ -1,10 +1,10 @@
-package edu.neu.cyse6200.tempui;
+package edu.neu.csye6200.tempui;
 
 public class ABRule implements Runnable{
 	public static boolean done = false;
 	public static int flag = 0;
 	public static int flag2 = 0;
-	public static Boat bt = new Boat("Cleaner", 0, 0, 90,"E", 20, 10, 100);
+	public static Boat bt = new Boat("Cleaner", 0, 0, 90,"E", 30, 10, 100);
 //	OceanGrid og = new OceanGrid();
 
 	public static int loopi = 0;
@@ -33,8 +33,14 @@ public class ABRule implements Runnable{
     	int gridH=OceanGrid.gridHeight-bt.getPosX();
     	int gridW=OceanGrid.gridWidth-bt.getPosY();
     	
-    	while(loopj<gridH-1 && done && !MySimulation.paused) {
-    		System.out.println(loopj);
+    	while(loopj<gridH-1 && done ) {
+    		if (MySimulation.paused)
+				try {
+					Thread.sleep(1000L);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+    		else {
     		bt.setDirection("W");
     		if(OceanGrid.gridData[loopi][loopj].oilSpread>0)
     			{OceanGrid.gridData[loopi][loopj].oilSpread=0;
@@ -44,11 +50,18 @@ public class ABRule implements Runnable{
     		MyAppUI.canvas.repaint();
     		
     		try{ Thread.sleep((int)(1000/bt.getSpeed())); } catch(Exception e){};
-    		loopj++;
+    		loopj++;}
 //    		og.getOilSpread();
        	}
     	
-    	while(loopi<gridW-1 && done && !MySimulation.paused) {
+    	while(loopi<gridW-1 && done ) {
+    		if (MySimulation.paused)
+				try {
+					Thread.sleep(1000L);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+    		else {
     		bt.setDirection("S");
     		if(OceanGrid.gridData[loopi][loopj].oilSpread>0)
     			{OceanGrid.gridData[loopi][loopj].oilSpread=0;
@@ -57,11 +70,18 @@ public class ABRule implements Runnable{
     			
     		MyAppUI.canvas.repaint();
     		try{ Thread.sleep((int)(1000/bt.getSpeed())); } catch(Exception e){};
-    		loopi++;
+    		loopi++;}
 //    		og.getOilSpread();
     	}
     	
-    	while(loopj>bt.getPosY()&& done && !MySimulation.paused) {
+    	while(loopj>bt.getPosY()&& done ) {
+    		if (MySimulation.paused)
+				try {
+					Thread.sleep(1000L);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+    		else {
     		bt.setDirection("E");
     		if(OceanGrid.gridData[loopi][loopj].oilSpread>0)
     			{OceanGrid.gridData[loopi][loopj].oilSpread=0;
@@ -70,11 +90,18 @@ public class ABRule implements Runnable{
     			
     		MyAppUI.canvas.repaint();
     		try{ Thread.sleep((int)(1000/bt.getSpeed())); } catch(Exception e){};
-    		loopj--;
+    		loopj--;}
 //    		og.getOilSpread();
     	}
     	
-    	while(loopi>bt.getPosX() && done && !MySimulation.paused) {
+    	while(loopi>bt.getPosX() && done ) {
+    		if (MySimulation.paused)
+				try {
+					Thread.sleep(1000L);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+    		else {
     		bt.setDirection("N");
     		if(OceanGrid.gridData[loopi][loopj].oilSpread>0)
     			{OceanGrid.gridData[loopi][loopj].oilSpread=0;
@@ -82,7 +109,7 @@ public class ABRule implements Runnable{
     			}
     		MyAppUI.canvas.repaint();
     		try{ Thread.sleep((int)(1000/bt.getSpeed())); } catch(Exception e){};
-    		loopi--;
+    		loopi--;}
 //    		og.getOilSpread();
     	}
     	
@@ -106,7 +133,14 @@ public class ABRule implements Runnable{
 	    	int gridH=OceanGrid.gridHeight-bt.getPosX();	  
 	    	int gridW=OceanGrid.gridWidth-bt.getPosY();
 	    	
-	    	while(loopi<gridH-1 && done && !MySimulation.paused) {
+	    	while(loopi<gridH-1 && done ) {
+	    		if (MySimulation.paused)
+					try {
+						Thread.sleep(1000L);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+	    		else{
 	    		bt.setDirection("N");
 	    		if(OceanGrid.gridData[loopi][loopj].oilSpread>0)
 	    			{OceanGrid.gridData[loopi][loopj].oilSpread=0;
@@ -115,11 +149,18 @@ public class ABRule implements Runnable{
 	    			}
 	    		MyAppUI.canvas.repaint();
 	    		try{ Thread.sleep((int)(1000/bt.getSpeed())); } catch(Exception e){};
-	    		loopi++;
+	    		loopi++;}
 //	    		og.getOilSpread();
 	    	}
 	    	
-	    	while(loopj<gridW-1 && done && !MySimulation.paused) {
+	    	while(loopj<gridW-1 && done ) {
+	    		if (MySimulation.paused)
+					try {
+						Thread.sleep(1000L);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+	    		else {
 	    		bt.setDirection("E");
 	    		if(OceanGrid.gridData[loopi][loopj].oilSpread>0)
 	    			{OceanGrid.gridData[loopi][loopj].oilSpread=0;
@@ -129,11 +170,18 @@ public class ABRule implements Runnable{
 	    			
 	    		MyAppUI.canvas.repaint();
 	    		try{ Thread.sleep((int)(1000/bt.getSpeed())); } catch(Exception e){};
-	    		loopj++;
+	    		loopj++;}
 //	    		og.getOilSpread();
 	    	}
 	    	
-	    	while(loopi>bt.getPosX() && done && !MySimulation.paused) {
+	    	while(loopi>bt.getPosX() && done ) {
+	    		if (MySimulation.paused)
+					try {
+						Thread.sleep(1000L);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+	    		else {
 	    		bt.setDirection("S");
 	    		if(OceanGrid.gridData[loopi][loopj].oilSpread>0)
 	    			{OceanGrid.gridData[loopi][loopj].oilSpread=0;
@@ -142,11 +190,18 @@ public class ABRule implements Runnable{
 	    			
 	    		MyAppUI.canvas.repaint();
 	    		try{ Thread.sleep((int)(1000/bt.getSpeed())); } catch(Exception e){};
-	    		loopi--;
+	    		loopi--;}
 //	    		og.getOilSpread();
 	    	}
 	    	
-	    	while(loopj>bt.getPosY() && done && !MySimulation.paused) {
+	    	while(loopj>bt.getPosY() && done ) {
+	    		if (MySimulation.paused)
+					try {
+						Thread.sleep(1000L);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+	    		else {
 	    		bt.setDirection("W");
 
 	    		if(OceanGrid.gridData[loopi][loopj].oilSpread>0)
@@ -157,7 +212,7 @@ public class ABRule implements Runnable{
 	    		MyAppUI.canvas.repaint();
 	    		
 	    		try{ Thread.sleep((int)(1000/bt.getSpeed())); } catch(Exception e){};
-	    		loopj--;
+	    		loopj--;}
 //	    		og.getOilSpread();
 	    		}
 	    	

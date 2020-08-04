@@ -1,4 +1,4 @@
-package edu.neu.cyse6200.tempui;
+package edu.neu.csye6200.tempui;
 
 import java.util.ArrayList;
 
@@ -50,6 +50,7 @@ public class OceanGrid implements Runnable{
     public void spreadOil(){
     	
     	if(done = false) return;
+    	if(totalOil<0) return;
     	for(OceanGrid gb: borderOil) {
     		if(gb.oilSpread<100) {
     			gb.oilSpread+=20;
@@ -61,8 +62,8 @@ public class OceanGrid implements Runnable{
 	    			break;}
     		}
     	}
-    	MyAppUI.canvas.repaint();
-    	try{ Thread.sleep(1000); } catch(Exception e){};
+//    	MyAppUI.canvas.repaint();
+    	try{ Thread.sleep(100); } catch(Exception e){};
     	
     }
 	

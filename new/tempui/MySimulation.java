@@ -1,20 +1,16 @@
-package edu.neu.cyse6200.tempui;
+package edu.neu.csye6200.tempui;
+
+import java.util.Observable;
 
 public class MySimulation implements Runnable{
-	
-	private String name ="";
+
 	public static boolean paused = false;
 	public static boolean done = false; // set true to end the simulation loop
-	private int ctr =0;
 	private Thread thread = null;
 	private Thread threadOil= null;
 	private Thread threadBoat= null;
 	private OceanGrid og = new OceanGrid();
 	private ABRule abr = new ABRule();
-	
-	public MySimulation(String name) {
-		this.name=name;
-	}
 	
 	@Override
 	public void run() {
@@ -25,7 +21,6 @@ public class MySimulation implements Runnable{
 		{
 			doWork();
 			sleepABit(500L);
-			System.out.println("Thread : "+ctr++);
 		}
 		}
 	}

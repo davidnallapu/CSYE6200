@@ -1,4 +1,4 @@
-package edu.neu.cyse6200.tempui;
+package edu.neu.csye6200.tempui;
 
 class Boat {
 	//Declaring variables for Boat class
