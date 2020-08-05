@@ -3,10 +3,10 @@ package edu.neu.csye6200.absim;
 class Boat {
 	//Declaring variables for Boat class
 	private String boatName, direction;
-	private int posX, posY,heading, batteryCapacity;
-	private double speed, loadCapacity;
+	private int posX, posY,heading, batteryCapacity, totalOil,loadCapacity;
+	private double speed;
 	
-	Boat(String boatName, int posX,int posY,int heading, String direction, double speed,double loadCapacity, int batteryCapacity ){
+	Boat(String boatName, int posX,int posY,int heading, String direction, double speed, int loadCapacity, int batteryCapacity , int totalOil){
 		setBoatName(boatName);
 		setPosX(posX);
 		setPosY(posY);
@@ -15,7 +15,9 @@ class Boat {
 		setSpeed(speed);
 		setLoadCapacity(loadCapacity);
 		setBatteryCapacity(batteryCapacity);
+		setTotalOil(totalOil);
 	}
+	
 	public String getDirection() {
 		return direction;
 	}
@@ -24,50 +26,8 @@ class Boat {
 	}
 	//moveTo method with new Positions as parameters. Prints out points that Boat drives through to reach the end position. 
 	public void moveTo(int newPosX, int newPosY){
-		//variables to calculate steps taken in moveTo method
-//		int stepsX = 0;
-//		int stepsY = 0;
 		setPosX(newPosX);	
 		setPosY(newPosY);
-		//Using a Cartesian coordinate frame of reference
-//		System.out.println("Moving to Position : ("+newPosX+", "+newPosY+")");
-//		if(newPosX > posX) {
-//			stepsX+=newPosX- posX;
-////			System.out.println("Moving "+stepsX+" steps in Direction : 'N'");
-////			for(int i =0; i< newPosX- posX; i++) {
-////				System.out.print("("+(posX+i+1)+","+posY+"), ");
-////			}
-//			
-//			setPosX(newPosX);	
-//		}
-//		else if (newPosX < posX) {
-////			stepsX+=posX-newPosX;
-////			System.out.println("Moving "+stepsX+" steps in Direction : 'S'");
-////			for(int i =0; i < posX - newPosX; i++) {
-////				System.out.print("("+(posX-i-1)+","+posY+"), ");
-////			}
-//			
-//			setPosX(newPosX);		
-//		}
-//		System.out.println();
-//		if(newPosY > posY) {
-//			stepsY+=newPosY- posY;
-//			System.out.println("Moving "+stepsY+" steps in Direction : 'E'");
-//			for(int i =0; i< newPosY- posY; i++) {
-//				System.out.print("("+posX+","+(posY+i+1)+"), ");
-//			}
-//			
-//			setPosY(newPosY);			
-//		}
-//		else if (newPosY < posY) {
-//			stepsY+=posY-newPosY;
-//			System.out.println("Moving "+stepsY+" steps in Direction : 'W'");
-//			for(int i =0; i < posY - newPosY; i++) {
-//				System.out.print("("+posX+","+(posY-i-1)+"), ");
-//			}
-//			setPosY(newPosY);		
-//		}
-//		System.out.println();System.out.println();
 		}
 	
 	
@@ -111,11 +71,11 @@ class Boat {
 		this.speed = speed;
 	}
 
-	public double getLoadCapacity() {
+	public int getLoadCapacity() {
 		return loadCapacity;
 	}
 
-	public void setLoadCapacity(double loadCapacity) {
+	public void setLoadCapacity(int loadCapacity) {
 		this.loadCapacity = loadCapacity;
 	}
 
@@ -131,6 +91,12 @@ class Boat {
 	public String toFormattedString() {
 		String st = String.format("%1$7s %2$5d %3$6d %4$8s° %5$10s %6$18s %7$20s ", getBoatName(),getPosX(),getPosY(),getHeading(),getSpeed(),getLoadCapacity(),getBatteryCapacity() );
 		return st; 
+	}
+	public int getTotalOil() {
+		return totalOil;
+	}
+	public void setTotalOil(int totalOil) {
+		this.totalOil = totalOil;
 	}
 	 
 	

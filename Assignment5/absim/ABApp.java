@@ -40,6 +40,7 @@ public abstract class ABApp implements ActionListener {
 		frame.setLayout(new BorderLayout());
 		frame.add(getNorthPanel(), BorderLayout.NORTH);
 		frame.add(getCenterPanel(), BorderLayout.CENTER);
+		frame.add(getSouthPanel(), BorderLayout.SOUTH);
     }
  
     
@@ -55,6 +56,11 @@ public abstract class ABApp implements ActionListener {
      */
     public abstract JPanel getCenterPanel();
 
+    /**
+     * Override this method to provide the statistics content panel.
+     * @return a JPanel, which contains the statistics content of of your application
+     */
+    public abstract JPanel getSouthPanel();
 
     /**
      * A convenience method that uses the Swing dispatch threat to show the UI.

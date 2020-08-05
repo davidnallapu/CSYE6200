@@ -1,21 +1,25 @@
 package edu.neu.csye6200.absim;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Logger;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class MyAppUI extends ABApp{
 
 	private Logger log = Logger.getLogger(MyAppUI.class.getName());
-	
 	private JPanel northPanel;
+	public static JPanel southPanel;
 	private JButton startBtn;
 	private JButton stopBtn;
 	private JButton pauseBtn;
@@ -89,10 +93,22 @@ public class MyAppUI extends ABApp{
 		});
 		
 		comboBox = new JComboBox<String>();
-		comboBox.addItem("Simple");
-		comboBox.addItem("Complex");
+		comboBox.addItem("Rule 1");
+		comboBox.addItem("Rule 2");
+		comboBox.addItem("Rule 3");
 		
-		
+		comboBox.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			if(comboBox.getSelectedItem() == "Rule 1")
+				ABRule.boatRule=1;
+			else if(comboBox.getSelectedItem() == "Rule 2") {
+				ABRule.boatRule=2;
+			}
+			else if(comboBox.getSelectedItem() == "Rule 3") {
+				ABRule.boatRule=3;
+			}
+		}
+	});
 		
 		northPanel.add(startBtn);
 		northPanel.add(pauseBtn);
@@ -100,8 +116,8 @@ public class MyAppUI extends ABApp{
 		
 		northPanel.add(new JLabel("Rule:"));
 		northPanel.add(comboBox);
-		
-		northPanel.setBackground(Color.BLUE);
+		northPanel.setBorder(BorderFactory.createTitledBorder("Control Panel"));
+		northPanel.setBackground(new Color(76, 119, 153));
 		return northPanel;
 	}
 
@@ -113,8 +129,39 @@ public class MyAppUI extends ABApp{
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public JPanel getSouthPanel() {
 		
+		southPanel = new JPanel();
+		southPanel.setLayout(new FlowLayout());
+		southPanel.add(new StatGraphics());
+		southPanel.setBorder(BorderFactory.createTitledBorder("Statistics"));
+		southPanel.setBackground(new Color(76, 119, 153));
+		return southPanel;
+	}
+
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+	}
+	
+	public class StatGraphics extends JComponent {
+
+		StatGraphics() {
+			setPreferredSize(new Dimension(600,50));
+        }
+
+        @Override
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.drawString("Oil Spread(%): "+Double.toString(OceanGrid.getOilSpread()),10, 10);
+            g.drawString("Oil CleanUp(%): "+(((double)ABRule.bt.getTotalOil()*100)/10000),210, 10);
+            g.drawString("Boat Details: ",10, 27);
+            g.drawString("Speed: "+Double.toString(ABRule.bt.getSpeed()),10, 45);
+            g.drawString("Load Capacity(%): "+Double.toString(ABRule.bt.getLoadCapacity()*100/8000),210, 45);
+            g.drawString("Battery (%): "+Double.toString(ABRule.bt.getBatteryCapacity()),410, 45);
+ 
+        }
 	}
 
 	

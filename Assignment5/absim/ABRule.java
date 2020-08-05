@@ -1,244 +1,239 @@
 package edu.neu.csye6200.absim;
 
-public class ABRule implements Runnable{
-	public static boolean done = false;
-	public static int flag = 0;
-	public static int flag2 = 0;
-	public static Boat bt = new Boat("Cleaner", 0, 0, 90,"E", 30, 10, 100);
-//	OceanGrid og = new OceanGrid();
+public class ABRule implements Runnable {
+    public static boolean done = false;
+    public static Boat bt = new Boat("Cleaner", 0, 0, 90, "E", 15, 0, 100,0);
+    public static int loopi = 0;
+    public static int loopj = 0;
+    public static int flag = 0;
+    public static int boatRule=1;
+    public void boatRule1() {
+        if (done) {
+            if (bt.getLoadCapacity()*100/8000>99 || bt.getBatteryCapacity()<5) {
+                fillOil();
+            } else {
+                    int oldPosX = bt.getPosX();
+                    int oldPosY = bt.getPosY();
+                    int gridH = OceanGrid.gridHeight - bt.getPosX();
+                    int gridW = OceanGrid.gridWidth - bt.getPosY();
+                    
+                    //Moving East
+                    while (bt.getPosY() < gridH - 1 && done) {
+                        if (MySimulation.paused)
+                        	pausedBoat();
+                        else {
+                        	cleanOil(bt.getPosX(), bt.getPosY());
+                            bt.setPosY(bt.getPosY()+1);
+                        }
+                    }
+                    //Moving South
+                    while (bt.getPosX() < gridW - 1 && done) {
+                        if (MySimulation.paused)
+                        	pausedBoat();
+                        else {
+                        	cleanOil(bt.getPosX(), bt.getPosY());
+                            bt.setPosX(bt.getPosX()+1);
+                        }
+                    }
+                    //Moving West
+                    while (bt.getPosY() > oldPosX && done) {
+                        if (MySimulation.paused)
+                        	pausedBoat();
+                        else {
+                        	cleanOil(bt.getPosX(), bt.getPosY());
+                        	bt.setPosY(bt.getPosY()-1);
+                        }
+                    }
+                    //Moving North
+                    while (bt.getPosX() > oldPosY && done) {
+                        if (MySimulation.paused)
+                        	pausedBoat();
+                        else {
+                        	cleanOil(bt.getPosX(), bt.getPosY());
+                        	bt.setPosX(bt.getPosX()-1);
+                        }
+                    }
+                    bt.setBatteryCapacity(bt.getBatteryCapacity() - 10);
+                    bt.moveTo(bt.getPosX() + 1, bt.getPosY() + 1);
+                }
+            }
+    }
 
-	public static int loopi = 0;
-	public Thread threadBoat = null;
-	public boolean isDone() {
-		return done;
-	}
-	public void setDone(boolean done) {
-		this.done = done;
-	}
-	public static int loopj = 0;
-	
-	public void boatTravelForward() {
-		if(done) {	
-		if(flag2==1) {
-			boatTravelBackward();
-		}
-		else {
-    	if(bt.getPosX()==OceanGrid.gridHeight/2 && bt.getPosY()==OceanGrid.gridWidth/2 && OceanGrid.borderOil.size()!=0){
-    		flag2=1;
-    		System.out.println("uncalled");
+    public void boatRule2() {
+        if (done) {
+            if (bt.getLoadCapacity()*100/8000>99 || bt.getBatteryCapacity()<5) {
+                fillOil();
+            } 
+        else {
+                    int oldPosX = bt.getPosX();
+                    int gridW = OceanGrid.gridWidth;
+
+                    while (bt.getPosX() < gridW - 1 && done) {
+                        if (MySimulation.paused)
+                            pausedBoat();
+                        else {
+                        	cleanOil(bt.getPosX(), bt.getPosY());
+                            bt.setPosX(bt.getPosX()+1);
+                        }
+                    }
+                    bt.setPosY(bt.getPosY() + 1);
+                    while (bt.getPosX() > oldPosX && done) {
+                        if (MySimulation.paused)
+                        	pausedBoat();
+                        else {
+                        	cleanOil(bt.getPosX(), bt.getPosY());
+                            bt.setPosX(bt.getPosX()-1);
+                        }
+                    }
+                    bt.setBatteryCapacity(bt.getBatteryCapacity() - 10);
+                    bt.moveTo(0, bt.getPosY() + 1);
+                }
+            }
+        
+    }
+
+    public static int flagLoop = 1;
+    public void boatRule3() {
+    	if (done) {
+            if (bt.getLoadCapacity()*100/8000>99 || bt.getBatteryCapacity()<5) {
+                fillOil();
+            }  
+            
+        else {
+        	
+    	if(flagLoop%2 == 1) {
+    		if (MySimulation.paused)
+                pausedBoat();
+    		else
+    		{
+    			bt.setPosX(bt.getPosX()+1);
+        		cleanOil(bt.getPosX(), bt.getPosY());
+        		for(int i=0; i<flagLoop;i++) {
+        			if (MySimulation.paused)
+                        pausedBoat();
+        			else {
+        				bt.setPosY(bt.getPosY()+1);
+            			cleanOil(bt.getPosX(), bt.getPosY());
+        			}
+        			
+        		}
+        		for(int i=0; i<flagLoop;i++) {
+        			if (MySimulation.paused)
+                        pausedBoat();
+        			else {
+        				bt.setPosX(bt.getPosX()-1);
+            			cleanOil(bt.getPosX(), bt.getPosY());
+        			}
+        		}	
+        		 bt.setBatteryCapacity(bt.getBatteryCapacity() - 10);
+                }
+    		
     	}
     	else {
-    	loopi =bt.getPosX();
-    	loopj = bt.getPosY();
-    	int gridH=OceanGrid.gridHeight-bt.getPosX();
-    	int gridW=OceanGrid.gridWidth-bt.getPosY();
-    	
-    	while(loopj<gridH-1 && done ) {
     		if (MySimulation.paused)
-				try {
-					Thread.sleep(1000L);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+                pausedBoat();
     		else {
-    		bt.setDirection("W");
-    		if(OceanGrid.gridData[loopi][loopj].oilSpread>0)
-    			{OceanGrid.gridData[loopi][loopj].oilSpread=0;
-    			OceanGrid.borderOil.remove(OceanGrid.gridData[loopi][loopj]);
-    			
-    			flag=1;}
-    		MyAppUI.canvas.repaint();
+    			bt.setPosY(bt.getPosY()+1);
+        		MyAppUI.canvas.repaint();
+        		timeSpeedDelay();
+        		for(int i=0; i<flagLoop;i++) {
+        			if (MySimulation.paused)
+                        pausedBoat();
+        			bt.setPosX(bt.getPosX()+1);
+        			cleanOil(bt.getPosX(), bt.getPosY());
+        		}
+        		for(int i=0; i<flagLoop;i++) {
+        			if (MySimulation.paused)
+                        pausedBoat();
+        			bt.setPosY(bt.getPosY()-1);
+        			cleanOil(bt.getPosX(), bt.getPosY());
+        		}
+    		}
+
+    	}
+    	flagLoop++;
+    	}}}
+    
+    
+    public void cleanOil(int newPosX, int newPosY) {
+    	if(bt.getLoadCapacity()*100/8000<100) {
+    	if (OceanGrid.gridData[newPosX][newPosY].oilSpread > 0) {
+    		if(bt.getTotalOil()+OceanGrid.gridData[newPosX][newPosY].oilSpread<=10000)
+    		bt.setTotalOil(bt.getTotalOil()+OceanGrid.gridData[newPosX][newPosY].oilSpread);
     		
-    		try{ Thread.sleep((int)(1000/bt.getSpeed())); } catch(Exception e){};
-    		loopj++;}
-//    		og.getOilSpread();
-       	}
+    		System.out.println(bt.getTotalOil());
+    		bt.setLoadCapacity(bt.getLoadCapacity()+OceanGrid.gridData[newPosX][newPosY].oilSpread);
+            OceanGrid.gridData[newPosX][newPosY].oilSpread = 0;
+            OceanGrid.borderOil.remove(OceanGrid.gridData[newPosX][newPosY]);
+        }
+    	else if (OceanGrid.gridData[newPosX][newPosY].oilSpread == -2) {
+            OceanGrid.gridData[newPosX][newPosY].oilSpread = -1;
+    		if(bt.getTotalOil()+OceanGrid.gridData[newPosX][newPosY].oilSpread<=10000)
+            bt.setTotalOil(bt.getTotalOil()+20);
+            bt.setLoadCapacity(bt.getLoadCapacity()+20);
+            OceanGrid.borderOil.remove(OceanGrid.gridData[newPosX][newPosY]);
+        }}
     	
-    	while(loopi<gridW-1 && done ) {
-    		if (MySimulation.paused)
-				try {
-					Thread.sleep(1000L);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-    		else {
-    		bt.setDirection("S");
-    		if(OceanGrid.gridData[loopi][loopj].oilSpread>0)
-    			{OceanGrid.gridData[loopi][loopj].oilSpread=0;
-    			OceanGrid.borderOil.remove(OceanGrid.gridData[loopi][loopj]);flag=1;
-    			}
-    			
-    		MyAppUI.canvas.repaint();
-    		try{ Thread.sleep((int)(1000/bt.getSpeed())); } catch(Exception e){};
-    		loopi++;}
-//    		og.getOilSpread();
-    	}
-    	
-    	while(loopj>bt.getPosY()&& done ) {
-    		if (MySimulation.paused)
-				try {
-					Thread.sleep(1000L);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-    		else {
-    		bt.setDirection("E");
-    		if(OceanGrid.gridData[loopi][loopj].oilSpread>0)
-    			{OceanGrid.gridData[loopi][loopj].oilSpread=0;
-    			OceanGrid.borderOil.remove(OceanGrid.gridData[loopi][loopj]);flag=1;
-    			}
-    			
-    		MyAppUI.canvas.repaint();
-    		try{ Thread.sleep((int)(1000/bt.getSpeed())); } catch(Exception e){};
-    		loopj--;}
-//    		og.getOilSpread();
-    	}
-    	
-    	while(loopi>bt.getPosX() && done ) {
-    		if (MySimulation.paused)
-				try {
-					Thread.sleep(1000L);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-    		else {
-    		bt.setDirection("N");
-    		if(OceanGrid.gridData[loopi][loopj].oilSpread>0)
-    			{OceanGrid.gridData[loopi][loopj].oilSpread=0;
-    			OceanGrid.borderOil.remove(OceanGrid.gridData[loopi][loopj]);flag=1;
-    			}
-    		MyAppUI.canvas.repaint();
-    		try{ Thread.sleep((int)(1000/bt.getSpeed())); } catch(Exception e){};
-    		loopi--;}
-//    		og.getOilSpread();
-    	}
-    	
-    	bt.setBatteryCapacity(bt.getBatteryCapacity()-10);
-    	bt.moveTo(bt.getPosX()+1, bt.getPosY()+1);
-    	}
-    	}
+        MyAppUI.southPanel.repaint();
+        MyAppUI.canvas.repaint();
+        timeSpeedDelay();
     }
-    	   	
-}
-	public void boatTravelBackward() {
-		if(done) {
-		if(bt.getPosX()==0 && bt.getPosY()==0) {
-			flag2=0;
-			boatTravelForward();
-		}
-		
-		else {
-	    	loopi = bt.getPosX();
-	    	loopj = bt.getPosY();
-	    	int gridH=OceanGrid.gridHeight-bt.getPosX();	  
-	    	int gridW=OceanGrid.gridWidth-bt.getPosY();
-	    	
-	    	while(loopi<gridH-1 && done ) {
-	    		if (MySimulation.paused)
-					try {
-						Thread.sleep(1000L);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-	    		else{
-	    		bt.setDirection("N");
-	    		if(OceanGrid.gridData[loopi][loopj].oilSpread>0)
-	    			{OceanGrid.gridData[loopi][loopj].oilSpread=0;
-	    			OceanGrid.borderOil.remove(OceanGrid.gridData[loopi][loopj]);
-//	    			
-	    			}
-	    		MyAppUI.canvas.repaint();
-	    		try{ Thread.sleep((int)(1000/bt.getSpeed())); } catch(Exception e){};
-	    		loopi++;}
-//	    		og.getOilSpread();
-	    	}
-	    	
-	    	while(loopj<gridW-1 && done ) {
-	    		if (MySimulation.paused)
-					try {
-						Thread.sleep(1000L);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-	    		else {
-	    		bt.setDirection("E");
-	    		if(OceanGrid.gridData[loopi][loopj].oilSpread>0)
-	    			{OceanGrid.gridData[loopi][loopj].oilSpread=0;
-	    			OceanGrid.borderOil.remove(OceanGrid.gridData[loopi][loopj]);
-//	    			
-	    			}
-	    			
-	    		MyAppUI.canvas.repaint();
-	    		try{ Thread.sleep((int)(1000/bt.getSpeed())); } catch(Exception e){};
-	    		loopj++;}
-//	    		og.getOilSpread();
-	    	}
-	    	
-	    	while(loopi>bt.getPosX() && done ) {
-	    		if (MySimulation.paused)
-					try {
-						Thread.sleep(1000L);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-	    		else {
-	    		bt.setDirection("S");
-	    		if(OceanGrid.gridData[loopi][loopj].oilSpread>0)
-	    			{OceanGrid.gridData[loopi][loopj].oilSpread=0;
-	    			OceanGrid.borderOil.remove(OceanGrid.gridData[loopi][loopj]);
-	    			}
-	    			
-	    		MyAppUI.canvas.repaint();
-	    		try{ Thread.sleep((int)(1000/bt.getSpeed())); } catch(Exception e){};
-	    		loopi--;}
-//	    		og.getOilSpread();
-	    	}
-	    	
-	    	while(loopj>bt.getPosY() && done ) {
-	    		if (MySimulation.paused)
-					try {
-						Thread.sleep(1000L);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-	    		else {
-	    		bt.setDirection("W");
 
-	    		if(OceanGrid.gridData[loopi][loopj].oilSpread>0)
-	    			{OceanGrid.gridData[loopi][loopj].oilSpread=0;
-	    			OceanGrid.borderOil.remove(OceanGrid.gridData[loopi][loopj]);
-	    			
-	    			}
-	    		MyAppUI.canvas.repaint();
-	    		
-	    		try{ Thread.sleep((int)(1000/bt.getSpeed())); } catch(Exception e){};
-	    		loopj--;}
-//	    		og.getOilSpread();
-	    		}
-	    	
+    public void timeSpeedDelay() {
+    	try {
+            Thread.sleep((int)(1000 / bt.getSpeed()));
+        } catch (Exception e) {};
+    }
+    
+    public void pausedBoat() {
+    	try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+    public void fillOil() {
+        while (bt.getPosX() > 0) {
+            try {
+                Thread.sleep((int)(1000 / bt.getSpeed()));
+            } catch (Exception e) {};
+            bt.setPosX(bt.getPosX()-1);
+            MyAppUI.canvas.repaint();
+        }
+        while (bt.getPosY() > 0) {
+            try {
+                Thread.sleep((int)(1000 / bt.getSpeed()));
+            } catch (Exception e) {};
+            bt.setPosY(bt.getPosY()-1);
+            MyAppUI.canvas.repaint();
+        }
+        flag = 0;
+        if(flagLoop>1) flagLoop=1;
+        try {
+            Thread.sleep(2000);
+        } catch (Exception e) {};
+        bt.setBatteryCapacity(100);
+        bt.setLoadCapacity(0);
+    }
 
-	    	bt.setBatteryCapacity(bt.getBatteryCapacity()-10);
-	    	bt.moveTo(bt.getPosX()-1, bt.getPosY()-1);
-	    	}
-		}
-		
-		
-	}
-	
-	public void run() {
-		while(done) {
-			if (MySimulation.paused)
-				try {
-					Thread.sleep(1000L);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			else {
-				boatTravelForward();
-			}
-			
-		}
-	}
-
-
+    public void run() {
+        while (done) {
+            if (MySimulation.paused)
+            	pausedBoat();
+            else {
+            	MyAppUI.southPanel.repaint();
+            	if(boatRule==1)
+                boatRule1();
+            	else if(boatRule == 2) {
+            		boatRule2();
+            	}
+            	else if(boatRule == 3) {
+            		boatRule3();
+            	}
+            		
+            }
+        }
+    }
 }

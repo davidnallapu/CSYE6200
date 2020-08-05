@@ -3,16 +3,14 @@ package edu.neu.csye6200.absim;
 import java.util.ArrayList;
 
 
-public class OceanGrid implements Runnable{
+class OceanGrid implements Runnable{
 	int R;
 	int C;
 	int oilSpread;
 	public static boolean done =false;
-	private ABRule abr = new ABRule();
-	int totalOil = 10000;
+	static int totalOil = 10000;
 	//Default constructor 
 	OceanGrid(){}
-	
 	
 	//For OceanGrid box with oil Spread
 	OceanGrid(int R, int C, int oilSpread){
@@ -25,7 +23,6 @@ public class OceanGrid implements Runnable{
     public static int gridHeight = 20;
     public static OceanGrid gridData[][] = new OceanGrid[gridHeight][gridWidth];
     public static ArrayList<OceanGrid> borderOil = new ArrayList<OceanGrid>();
-//    public static ArrayList<OceanGrid> activeOil = new ArrayList<OceanGrid>();
     
     public void makeGrid() {
     	for(int i =0; i < gridHeight;i++) {
@@ -37,82 +34,63 @@ public class OceanGrid implements Runnable{
     	}    	
     }
     
-//    public void printGrid(){
-//    	System.out.println("___________________ Grid ___________________\n");
-//    	for(int i =0; i < gridHeight;i++) {
-//    		for(int j=0; j<gridWidth;j++) {
-//    		System.out.print(String.format("%1$4s",gridData[i][j].oilSpread));
-//    	}
-//    		System.out.println();}
-//    	System.out.println("____________________________________________");
-//    }    
-    
+      
     public void spreadOil(){
-    	
     	if(done = false) return;
     	if(totalOil<0) return;
     	for(OceanGrid gb: borderOil) {
-    		if(gb.oilSpread<100) {
+    		if(gb.oilSpread==-1 && totalOil>=20) {gb.oilSpread=-2; totalOil-=20;}
+    		else if(gb.oilSpread<100 && gb.oilSpread>=0 && totalOil>=20) {
     			gb.oilSpread+=20;
     			totalOil-=20;
-//    			if(gb.oilSpread == 20) activeOil.add(gb);
     			if(gb.oilSpread == 100) {
 	    			updateGrid(gb);
 	    			borderOil.remove(gb);
 	    			break;}
     		}
     	}
-//    	MyAppUI.canvas.repaint();
     	try{ Thread.sleep(100); } catch(Exception e){};
     	
     }
+    
 	
     public void updateGrid(OceanGrid gb) {
     	//Check W
-    	if(gb.R>-1 && gb.C-1 >-1 && gb.R <= gridHeight-1 && gb.C-1 <= gridWidth-1 && gridData[gb.R][gb.C-1].oilSpread==0)
+    	if(gb.R>-1 && gb.C-1 >-1 && gb.R <= gridHeight-1 && gb.C-1 <= gridWidth-1 && (gridData[gb.R][gb.C-1].oilSpread==0 || gridData[gb.R][gb.C-1].oilSpread==-1))
 			borderOil.add(gridData[gb.R][gb.C-1]);
     	
 		//Check NW
-		if(gb.R-1>-1 && gb.C-1 >-1 && gb.R-1 <= gridHeight-1 && gb.C-1 <= gridWidth-1 && gridData[gb.R-1][gb.C-1].oilSpread==0)
+		if(gb.R-1>-1 && gb.C-1 >-1 && gb.R-1 <= gridHeight-1 && gb.C-1 <= gridWidth-1 && (gridData[gb.R-1][gb.C-1].oilSpread==0 || gridData[gb.R-1][gb.C-1].oilSpread==-1))
 			borderOil.add(gridData[gb.R-1][gb.C-1]);
 
 		//Check N
-		if(gb.R-1>-1 && gb.C >-1 && gb.R-1 <= gridHeight-1 && gb.C <= gridWidth-1 && gridData[gb.R-1][gb.C].oilSpread==0)
+		if(gb.R-1>-1 && gb.C >-1 && gb.R-1 <= gridHeight-1 && gb.C <= gridWidth-1 && (gridData[gb.R-1][gb.C].oilSpread==0 || gridData[gb.R-1][gb.C].oilSpread==-1))
 			borderOil.add(gridData[gb.R-1][gb.C]);
 
 		//Check NE
-		if(gb.R-1>-1 && gb.C+1 >-1 && gb.R -1<= gridHeight-1 && gb.C+1 <= gridWidth-1 && gridData[gb.R-1][gb.C+1].oilSpread==0)
+		if(gb.R-1>-1 && gb.C+1 >-1 && gb.R -1<= gridHeight-1 && gb.C+1 <= gridWidth-1 && (gridData[gb.R-1][gb.C+1].oilSpread==0 || gridData[gb.R-1][gb.C+1].oilSpread==-1))
 			borderOil.add(gridData[gb.R-1][gb.C+1]);
 
 		//Check E
-		if(gb.R>-1 && gb.C+1 >-1 && gb.R <= gridHeight-1 && gb.C+1 <= gridWidth-1 && gridData[gb.R][gb.C+1].oilSpread==0)
+		if(gb.R>-1 && gb.C+1 >-1 && gb.R <= gridHeight-1 && gb.C+1 <= gridWidth-1 && (gridData[gb.R][gb.C+1].oilSpread==0 || gridData[gb.R][gb.C+1].oilSpread==-1))
 			borderOil.add(gridData[gb.R][gb.C+1]);
 			
 		//Check SE
-		if(gb.R+1>-1 && gb.C+1 >-1 && gb.R+1 <= gridHeight-1 && gb.C+1 <= gridWidth-1 && gridData[gb.R+1][gb.C+1].oilSpread==0)
+		if(gb.R+1>-1 && gb.C+1 >-1 && gb.R+1 <= gridHeight-1 && gb.C+1 <= gridWidth-1 && (gridData[gb.R+1][gb.C+1].oilSpread==0 || gridData[gb.R+1][gb.C+1].oilSpread==-1))
 			borderOil.add(gridData[gb.R+1][gb.C+1]);
 			
 		//Check S
-		if(gb.R+1>-1 && gb.C >-1 && gb.R+1 <= gridHeight-1 && gb.C <= gridWidth-1 && gridData[gb.R+1][gb.C].oilSpread==0)
+		if(gb.R+1>-1 && gb.C >-1 && gb.R+1 <= gridHeight-1 && gb.C <= gridWidth-1 && (gridData[gb.R+1][gb.C].oilSpread==0 || gridData[gb.R+1][gb.C].oilSpread==-1 ))
 			borderOil.add(gridData[gb.R+1][gb.C]);
 		
 		//Check SW
-		if(gb.R+1>-1 && gb.C-1 >-1 && gb.R+1 <= gridHeight-1 && gb.C-1 <= gridWidth-1 && gridData[gb.R+1][gb.C-1].oilSpread==0)
+		if(gb.R+1>-1 && gb.C-1 >-1 && gb.R+1 <= gridHeight-1 && gb.C-1 <= gridWidth-1 && (gridData[gb.R+1][gb.C-1].oilSpread==0||gridData[gb.R+1][gb.C-1].oilSpread==-1))
 			borderOil.add(gridData[gb.R+1][gb.C-1]);
     
     }
     
-    public static double oilSpreadPerc;
-    public void getOilSpread() {
-    	oilSpreadPerc=0;
-    	for(int i =0; i < gridHeight;i++) {
-    		for(int j=0; j<gridWidth;j++) {
-    			if(gridData[i][j].oilSpread == 100) {
-    				oilSpreadPerc+=1;
-    			}
-    		}
-    	}
-    	oilSpreadPerc=oilSpreadPerc*100/(gridHeight*gridWidth);
+    public static double getOilSpread() {
+    	return 100-(totalOil*100/10000);
     }
 
 	@Override
@@ -126,10 +104,21 @@ public class OceanGrid implements Runnable{
 				}
 			else {
 				spreadOil();
+				
 			}
 		}
 	}
     
     
 }
+
+//public void printGrid(){
+//System.out.println("___________________ Grid ___________________\n");
+//for(int i =0; i < gridHeight;i++) {
+//	for(int j=0; j<gridWidth;j++) {
+//	System.out.print(String.format("%1$4s",gridData[i][j].oilSpread));
+//}
+//	System.out.println();}
+//System.out.println("____________________________________________");
+//} 
 

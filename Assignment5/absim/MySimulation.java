@@ -1,7 +1,5 @@
 package edu.neu.csye6200.absim;
 
-import java.util.Observable;
-
 public class MySimulation implements Runnable{
 
 	public static boolean paused = false;
@@ -10,19 +8,18 @@ public class MySimulation implements Runnable{
 	private Thread threadOil= null;
 	private Thread threadBoat= null;
 	private long simDelay = 500L; // time adjustment to slow down the simulation loop
-	private int ctr = 0;
 	private boolean running = false; // set true if the simulation is running
 	
 	private OceanGrid og = new OceanGrid();
 	private ABRule abr = new ABRule();
 	
 	public void startSim() {
+		
 		if (thread != null) return; // A thread is already running
 		thread = new Thread(this); // Create a worker thread
 		running = true;
 		paused = false;
 		done = false; // reset the done flag.
-		ctr = 0; // reset the loop counter
 		thread.start();
 	
 	}
@@ -32,7 +29,7 @@ public class MySimulation implements Runnable{
 		}
 	
 	public boolean isPaused() {
-		return this.paused;
+		return MySimulation.paused;
 	}
 	
 	public boolean isPausable() {
@@ -89,7 +86,7 @@ public class MySimulation implements Runnable{
     }
 	
 	private void doWork() {
-		abr.setDone(true);
+		ABRule.done=true;
 		OceanGrid.done=false;
 		if(threadOil == null && threadBoat == null) {
 			threadOil = new Thread(og);
@@ -103,15 +100,15 @@ public class MySimulation implements Runnable{
 		}
 	
 	public void setDone(boolean done) {
-		this.done=done;
+		MySimulation.done=done;
 		OceanGrid.done=true;
-		abr.setDone(false);
+		ABRule.done=false;
 	}
 	
 
 	
 	public void setPaused(boolean paused) {
-		this.paused=paused;
+		MySimulation.paused=paused;
 	}
 
 	
