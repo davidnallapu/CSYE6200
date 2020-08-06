@@ -42,7 +42,7 @@ public class MyAppUI extends ABApp{
 		menuMgr.createDefaultActions(); // Set up default menu items
 		
 		initSim(); // Initialize the sim
-//		initGUI();
+
 		showUI(); // Initialize the GUI
 	}
 	
@@ -71,7 +71,6 @@ public class MyAppUI extends ABApp{
 		startBtn = new JButton("Start");
 		startBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("start pressed");
 				mySim.startSim();
 			}
 		});
@@ -79,7 +78,6 @@ public class MyAppUI extends ABApp{
 		pauseBtn = new JButton("Pause");
 		pauseBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("pause pressed");
 				mySim.pauseSim();
 			}
 		});
@@ -87,7 +85,6 @@ public class MyAppUI extends ABApp{
 		stopBtn = new JButton("Stop");
 		stopBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("stop pressed");
 				mySim.stopSim();
 			}
 		});
@@ -154,12 +151,13 @@ public class MyAppUI extends ABApp{
         @Override
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
-            g.drawString("Oil Spread(%): "+Double.toString(OceanGrid.getOilSpread()),10, 10);
+            g.drawString("Oil Spread: "+Double.toString(OceanGrid.getOilSpread()),10, 10);
             g.drawString("Oil CleanUp(%): "+(((double)ABRule.bt.getTotalOil()*100)/10000),210, 10);
             g.drawString("Boat Details: ",10, 27);
-            g.drawString("Speed: "+Double.toString(ABRule.bt.getSpeed()),10, 45);
-            g.drawString("Load Capacity(%): "+Double.toString(ABRule.bt.getLoadCapacity()*100/8000),210, 45);
-            g.drawString("Battery (%): "+Double.toString(ABRule.bt.getBatteryCapacity()),410, 45);
+            g.drawString("Status: "+ABRule.bt.getStatus(),10, 45);
+            g.drawString("Speed: "+Double.toString(ABRule.bt.getSpeed()),135, 45);
+            g.drawString("Load Capacity(%): "+Double.toString(ABRule.bt.getLoadCapacity()*100/8000),250, 45);
+            g.drawString("Battery (%): "+Double.toString(ABRule.bt.getBatteryCapacity()),445, 45);
  
         }
 	}

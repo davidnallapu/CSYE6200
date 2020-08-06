@@ -34,6 +34,7 @@ public class MyCanvas extends JPanel{
 		}
 		og.makeGrid();
 		OceanGrid.gridData[OceanGrid.gridWidth/2-1][OceanGrid.gridHeight/2-1].oilSpread=60;
+		OceanGrid.totalOil-= 60;
 		OceanGrid.borderOil.add(OceanGrid.gridData[OceanGrid.gridWidth/2-1][OceanGrid.gridHeight/2-1]);
 		
 		//Adding Land mass

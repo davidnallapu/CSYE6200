@@ -2,16 +2,16 @@ package edu.neu.csye6200.absim;
 
 class Boat {
 	//Declaring variables for Boat class
-	private String boatName, direction;
+	private String boatName, direction, status;
 	private int posX, posY,heading, batteryCapacity, totalOil,loadCapacity;
 	private double speed;
 	
-	Boat(String boatName, int posX,int posY,int heading, String direction, double speed, int loadCapacity, int batteryCapacity , int totalOil){
+	Boat(String boatName, int posX,int posY,int heading, String status, double speed, int loadCapacity, int batteryCapacity , int totalOil){
 		setBoatName(boatName);
 		setPosX(posX);
 		setPosY(posY);
 		setHeading(heading);
-		setDirection(direction);
+		setStatus(status);
 		setSpeed(speed);
 		setLoadCapacity(loadCapacity);
 		setBatteryCapacity(batteryCapacity);
@@ -97,6 +97,14 @@ class Boat {
 	}
 	public void setTotalOil(int totalOil) {
 		this.totalOil = totalOil;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	 
 	

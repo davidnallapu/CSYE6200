@@ -100,13 +100,16 @@ public class MySimulation implements Runnable{
 		}
 	
 	public void setDone(boolean done) {
+		System.out.println(ABRule.bt.getPosX()+" wow "+ABRule.bt.getPosY());
 		MySimulation.done=done;
 		OceanGrid.done=true;
 		ABRule.done=false;
+		ABRule.bt.setStatus("STOPPED");
+		MyAppUI.southPanel.repaint();
 	}
 	
 
-	
+
 	public void setPaused(boolean paused) {
 		MySimulation.paused=paused;
 	}
